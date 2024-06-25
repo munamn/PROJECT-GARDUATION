@@ -1,0 +1,189 @@
+package com.example.valuationcompanies;
+
+import android.os.Bundle;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+
+
+public class HomeLoadRequestForm extends AppCompatActivity {
+
+    private Button btnRequest;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        setContentView(R.layout.activity_home_load_request_form);
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE},
+                PackageManager.PERMISSION_GRANTED);
+        btnRequest=(Button) findViewById(R.id.btnRequest);
+        btnRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openRequest();
+            }
+        });
+
+
+    }
+
+    public void buttonCreateFile(View view) {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT, MediaStore.Downloads.EXTERNAL_CONTENT_URI);
+//        intent.setType("application/pdf");
+        intent.setType("*/*");
+        this.startActivity(intent);
+    }
+
+    public void buttonOpenFile(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, MediaStore.Downloads.EXTERNAL_CONTENT_URI);
+//        intent.setType("application/pdf");
+        intent.setType("*/*");
+        this.startActivity(intent);
+    }
+    public void openRequest() {
+        Intent intent10 = new Intent(this, LogoutPage.class);
+        startActivity(intent10);
+
+    }
+
+}
+
+XML
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/loginbkg"
+    tools:context=".HomeLoadRequestForm">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="424dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/custom_edittext"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="514dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+
+            <TextView
+                android:id="@+id/loginText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"
+                android:text="Please download the reuired form, fill it..."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/button2"
+                android:onClick="buttonOpenFile"
+                android:text="Download File"
+                android:backgroundTint="@color/DarkRed"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.435"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.33"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:cornerRadius="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"
+                />
+
+
+
+            <TextView
+                android:id="@+id/attachText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"
+                android:text="Now please attach it ..."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/button"
+                android:backgroundTint="@color/DarkRed"
+                android:onClick="buttonCreateFile"
+                android:text="Upload File"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.407"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.33"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:cornerRadius="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"/>
+
+            <TextView
+                android:id="@+id/RequestText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/acme"
+                android:text="Almost Done!! Request your order Now ..."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+
+            <Button
+                android:id="@+id/btnRequest"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/DarkRed"
+                android:text="Request"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="20dp" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
+
